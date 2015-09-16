@@ -1,0 +1,7 @@
+# -*- python -*-
+bld.smplpkg('WireCellRootVis', use='ROOTSYS WireCellIface WireCellUtil', test_use='ROOTSYS')
+
+#print bld.env
+
+
+
