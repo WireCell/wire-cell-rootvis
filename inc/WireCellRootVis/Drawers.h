@@ -7,6 +7,7 @@
 #include "WireCellIface/ICell.h"
 #include "WireCellIface/IDepo.h"
 #include "WireCellIface/IDiffusion.h"
+#include "WireCellIface/ICellSlice.h"
 
 #include "TPad.h"
 
@@ -22,6 +23,8 @@ namespace WireCellRootVis {
 
     void draw2d(TVirtualPad& pad, const WireCell::IDiffusionVector& diffusions);
 
+
+    void draw3d(TVirtualPad& pad, const WireCell::ICellSliceVector& csv);
 }
 
 

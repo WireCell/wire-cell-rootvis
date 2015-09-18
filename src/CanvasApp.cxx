@@ -66,5 +66,6 @@ TVirtualPad& WireCellRootVis::CanvasApp::pad(int n)
 TVirtualPad& WireCellRootVis::CanvasApp::clear()
 {
     m_canvas->Clear();
+    m_npad = -1;
     return *m_canvas;
 }

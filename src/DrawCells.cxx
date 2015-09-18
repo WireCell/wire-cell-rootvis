@@ -1,21 +1,27 @@
 #include "WireCellRootVis/Drawers.h"
+
 #include "WireCellUtil/BoundingBox.h"
 
 #include "TPolyLine.h"
+#include "TView.h"
+#include "TGraph2D.h"
 
 #include <iostream>
 
 using namespace WireCell;
 using namespace std;
 
-void WireCellRootVis::draw2d(TVirtualPad& pad, const ICellVector& cells)
+Ray bounds(const ICellVector& cells)
 {
     BoundingBox bbox;
     for (auto cell: cells) {
 	bbox(cell->center());
     }
-
-    const Ray bb = bbox.bounds();
+    return bbox.bounds();
+}
+void WireCellRootVis::draw2d(TVirtualPad& pad, const ICellVector& cells)
+{
+    Ray bb = bounds(cells);
     const double enlarge = 1.2;
     pad.DrawFrame(enlarge*bb.first.z(), enlarge*bb.first.y(),
 		  enlarge*bb.second.z(), enlarge*bb.second.y());
@@ -52,4 +58,25 @@ void WireCellRootVis::draw2d(TVirtualPad& pad, const ICellVector& cells)
 	pl->Draw("f");
     }
 
+}
+
+void WireCellRootVis::draw3d(TVirtualPad& pad, const WireCell::ICellSliceVector& csv)
+{
+    TGraph2D* graph = new TGraph2D; // leak!
+    BoundingBox bbox;
+    for (auto cs : csv) {
+	for (auto cell : cs->cells()) {
+	    Point c = cell->center();
+	    Point p(cs->time(), c.y(), c.z());
+	    bbox(p);
+	    graph->SetPoint(graph->GetN(), p.x(), p.y(), p.z());
+	}
+    }
+    Ray bb = bbox.bounds();
+
+    TView* view = TView::CreateView(1);
+    view->SetRange(bb.first.x(),bb.first.y(),bb.first.z(),
+		   bb.second.x(),bb.second.y(),bb.second.z());
+    view->ShowAxis();
+    graph->Draw("P");
 }
