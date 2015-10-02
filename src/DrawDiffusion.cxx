@@ -3,7 +3,7 @@
 
 #include "TH2F.h"
 
-void WireCellRootVis::draw2d(TVirtualPad& pad, const WireCell::IDiffusionVector& diffusions)
+void WireCellRootVis::draw2d(TVirtualPad& pad, const WireCell::IDiffusion::vector& diffusions)
 {
     double lmin, lmax, tmin, tmax;
     lmin = tmin = std::numeric_limits<double>::max();

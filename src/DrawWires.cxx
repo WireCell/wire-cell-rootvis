@@ -7,8 +7,10 @@
 #include "TArrow.h"
 
 using namespace WireCell;
+using namespace std;
 
-void WireCellRootVis::draw2d(TVirtualPad& pad, const IWireVector& wires)
+void WireCellRootVis::draw2d(TVirtualPad& pad, const IWire::vector& wires,
+			     const vector<int>& colors)
 {    
     BoundingBox bbox;
     for (auto wire : wires) {
@@ -16,9 +18,7 @@ void WireCellRootVis::draw2d(TVirtualPad& pad, const IWireVector& wires)
     }
     WireCellRootVis::view_zy(pad, bbox.bounds());
 
-    int colors[3] = {2, 4, 1};
-
-    IWireVector u_wires, v_wires, w_wires;
+    IWire::vector u_wires, v_wires, w_wires;
     std::copy_if(wires.begin(), wires.end(), back_inserter(u_wires), select_u_wires);
     std::copy_if(wires.begin(), wires.end(), back_inserter(v_wires), select_v_wires);
     std::copy_if(wires.begin(), wires.end(), back_inserter(w_wires), select_w_wires);
@@ -28,8 +28,7 @@ void WireCellRootVis::draw2d(TVirtualPad& pad, const IWireVector& wires)
 	w_wires.size()
     };
 
-    for (auto wit = wires.begin(); wit != wires.end(); ++wit) {
-	IWire::pointer wire = *wit;
+    for (auto wire : wires) {
 	int iplane = wire->planeid().index();
 	int index = wire->index();
 

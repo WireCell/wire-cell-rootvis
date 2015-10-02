@@ -5,7 +5,7 @@
 
 using namespace WireCell;
 
-void WireCellRootVis::draw2d(TVirtualPad& pad, IWireParameters::pointer wp)
+void WireCellRootVis::draw2d(TVirtualPad& pad, const IWireParameters& iwp)
 {
     TH1F* frame = pad.DrawFrame(0,-10, 20,10);
     frame->SetTitle("Pitch (thick) and wire (thin) red=U, blue=V, +X (-drift) direction into page");
@@ -15,7 +15,7 @@ void WireCellRootVis::draw2d(TVirtualPad& pad, IWireParameters::pointer wp)
     int colors[3] = {2, 4, 1};
 
     const Vector xaxis(1,0,0);
-    const Ray pitch_rays[3] = { wp->pitchU(), wp->pitchV(), wp->pitchW() };
+    const Ray pitch_rays[3] = { iwp.pitchU(), iwp.pitchV(), iwp.pitchW() };
 
     for (int ind=0; ind<3; ++ind) {
 	Ray r_pitch = pitch_rays[ind];

@@ -7,7 +7,7 @@
 
 using namespace WireCell;
 
-void WireCellRootVis::draw2d(TVirtualPad& pad, const WireCell::IDepoVector& depos)
+void WireCellRootVis::draw2d(TVirtualPad& pad, const WireCell::IDepo::vector& depos)
 {
     BoundingBox bbox;
     double tmin=-1, tmax=-1;

@@ -11,7 +11,7 @@
 using namespace WireCell;
 using namespace std;
 
-Ray bounds(const ICellVector& cells)
+static Ray bounds(const ICell::vector& cells)
 {
     BoundingBox bbox;
     for (auto cell: cells) {
@@ -19,7 +19,7 @@ Ray bounds(const ICellVector& cells)
     }
     return bbox.bounds();
 }
-void WireCellRootVis::draw2d(TVirtualPad& pad, const ICellVector& cells)
+void WireCellRootVis::draw2d(TVirtualPad& pad, const ICell::vector& cells)
 {
     Ray bb = bounds(cells);
     const double enlarge = 1.2;
@@ -60,12 +60,13 @@ void WireCellRootVis::draw2d(TVirtualPad& pad, const ICellVector& cells)
 
 }
 
-void WireCellRootVis::draw3d(TVirtualPad& pad, const WireCell::ICellSliceVector& csv)
+void WireCellRootVis::draw3d(TVirtualPad& pad, const WireCell::ICellSlice::vector& csv)
 {
     TGraph2D* graph = new TGraph2D; // leak!
     BoundingBox bbox;
     for (auto cs : csv) {
-	for (auto cell : cs->cells()) {
+	ICell::shared_vector cells = cs->cells();
+	for (auto cell : *cells) {
 	    Point c = cell->center();
 	    Point p(cs->time(), c.y(), c.z());
 	    bbox(p);
