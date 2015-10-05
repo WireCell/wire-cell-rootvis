@@ -12,7 +12,7 @@ namespace WireCellRootVis {
 
     /** Return a new TPolyMarker3D made from depositions. 
      */
-    TPolyMarker3D* polymarker3d(const WireCell::IDepoVector& depos,
+    TPolyMarker3D* polymarker3d(const WireCell::IDepo::vector& depos,
 				int color=1, int marker = 6);
     
     TArrow* arrow(const WireCell::Ray& ray, int color=1);

@@ -1,7 +1,7 @@
 #include "WireCellRootVis/Converters.h"
 
 
-TPolyMarker3D* WireCellRootVis::polymarker3d(const WireCell::IDepoVector& depos,
+TPolyMarker3D* WireCellRootVis::polymarker3d(const WireCell::IDepo::vector& depos,
 					     int color, int marker_type)
 {
     TPolyMarker3D* pm = new TPolyMarker3D(depos.size(), marker_type);
