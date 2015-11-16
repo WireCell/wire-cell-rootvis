@@ -66,6 +66,9 @@ void WireCellRootVis::draw3d(TVirtualPad& pad, const WireCell::ICellSlice::vecto
     BoundingBox bbox;
     for (auto cs : csv) {
 	ICell::shared_vector cells = cs->cells();
+	if (!cells) {
+	    continue;
+	}
 	for (auto cell : *cells) {
 	    Point c = cell->center();
 	    Point p(cs->time(), c.y(), c.z());
