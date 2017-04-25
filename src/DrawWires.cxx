@@ -22,15 +22,9 @@ void WireCellRootVis::draw2d(TVirtualPad& pad, const IWire::vector& wires,
     std::copy_if(wires.begin(), wires.end(), back_inserter(u_wires), select_u_wires);
     std::copy_if(wires.begin(), wires.end(), back_inserter(v_wires), select_v_wires);
     std::copy_if(wires.begin(), wires.end(), back_inserter(w_wires), select_w_wires);
-    size_t n_wires[3] = {
-	u_wires.size(),
-	v_wires.size(),
-	w_wires.size()
-    };
 
     for (auto wire : wires) {
 	int iplane = wire->planeid().index();
-	int index = wire->index();
 
 	const Ray ray = wire->ray();
 

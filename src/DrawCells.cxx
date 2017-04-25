@@ -42,7 +42,7 @@ void WireCellRootVis::draw2d(TVirtualPad& pad, const ICell::vector& cells)
 	size_t ncorners = corners.size();
 
 	TPolyLine* pl = new TPolyLine;
-	int ind=0;
+	size_t ind=0;
 	Point first_point;
 	for (; ind<ncorners; ++ind) {
 	    const Point& p = corners[ind];
